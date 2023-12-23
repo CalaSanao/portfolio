@@ -7,7 +7,7 @@ import IATecnologiesItems from "./tecnologies/IATecnologiesItems.js"
 
 </script>
 <template>
-  <div class="flex items-center justify-center min-h-screen">
+  <section class="flex items-center justify-center min-h-screen">
     <div class="container my-24">
       <div class="grid grid-cols-1 md:grid-cols-5 grid-rows-5 gap-4 mt-3">
 
@@ -111,6 +111,6 @@ import IATecnologiesItems from "./tecnologies/IATecnologiesItems.js"
 
       </div>
     </div>
-  </div>
+  </section>
 </template>
   

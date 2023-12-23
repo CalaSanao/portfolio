@@ -1,23 +1,30 @@
 <script setup>
-import { onMounted, ref, watch, watchEffect } from 'vue';
-import { themeChange } from 'theme-change'
-
+import { ref, watchEffect } from 'vue';
 const theme = ref('dark');
 
 const toggleTheme = () => {
-    // get the current theme
     theme.value = theme.value === 'dark' ? 'light' : 'dark';
     document.querySelector('html').setAttribute('data-theme', theme.value);
-
+    localStorage.theme = theme.value;
 };
 
-onMounted(() => {
+watchEffect(() => {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+        theme.value = 'dark'
+    } else {
+        document.documentElement.classList.remove('dark')
+        document.documentElement.classList.add('light')
+        theme.value = 'light'
+    }
     document.querySelector('html').setAttribute('data-theme', theme.value);
+    localStorage.theme = theme.value;
 })
+
 
 </script>
 <template>
-    <header class="fixed top-5 w-full px-5 z-10">
+    <header class="fixed top-5 w-full px-5 z-50">
         <div class="bg-gradient-to-r from-accent to-info text-accent-content navbar rounded-full px-5">
             <div class="navbar-start">
                 <div class="dropdown">
